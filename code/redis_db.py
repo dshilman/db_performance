@@ -1,5 +1,5 @@
 import time
-import redis from Redis
+from redis import Redis
 from base_db import BaseDB
 
 
@@ -15,7 +15,7 @@ class RedisDB (BaseDB):
         # self.redis_db = 0  # Redis database number
         # self.redis_password = 'your_redis_password'
 
-        self.r = redis.StrictRedis(host=self.redis_host, port=self.redis_port)
+        self.r = Redis.StrictRedis(host=self.redis_host, port=self.redis_port)
 
     # Function to create records in DynamoDB
     def create_records(self, thread_id, instrument_json):
