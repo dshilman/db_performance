@@ -40,4 +40,4 @@ class DynamoDB (BaseDB):
 if __name__ == "__main__":
 
     file_name = 'instrument.json'
-    DynamoDB(file_name=file_name, threads=2, records=2).execute()
+    DynamoDB(file_name=file_name, threads=10, records=20).execute()
