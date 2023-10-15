@@ -17,11 +17,12 @@ class DynamoDB (BaseDB):
 
         for i in range(1, super().records):
             key = str(thread_id * 10 + i)
-            start_time = time.time()
             item = {
                 'Key': key,
                 'Data': instrument_json
             }
+
+            start_time = time.time()
             self.table.put_item(Item=item)
             end_time = time.time()
             execution_time = end_time - start_time

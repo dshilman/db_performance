@@ -41,12 +41,15 @@ class CassandraDB(BaseDB):
     def create_records(self, thread_id, instrument_json):
 
         value = json.dumps(instrument_json, cls=DecimalEncoder)
-    
+
+        query = "INSERT INTO instruments (key, data) VALUES (?, ?)"
+
         for i in range(1, super().records):
             key = str(thread_id * 10 + i)
+            pStatement = self.session.prepare(query)
+
             start_time = time.time()
-            query = f"INSERT INTO instruments (key, data) VALUES ({key}, {value})"
-            self.session.execute(query)
+            self.session.execute(pStatement, [key, value])
             end_time = time.time()
             execution_time = end_time - start_time
 
