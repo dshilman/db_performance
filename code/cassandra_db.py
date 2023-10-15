@@ -43,8 +43,8 @@ class CassandraDB(BaseDB):
         value = json.dumps(instrument_json, cls=DecimalEncoder).encode()
 
         for i in range(1, super().records):
-            key = str(thread_id * 10 + i)
-            query = f"INSERT INTO db_performance.instruments (key, data_1) VALUES ({key}, $${value}$$);"
+            key = ascii(str(thread_id * 10 + i))
+            query = f"INSERT INTO db_performance.instruments (key, data) VALUES ({key}, $${value}$$);"
 
             start_time = time.time()
             self.session.execute(query)
