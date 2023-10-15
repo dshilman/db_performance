@@ -7,12 +7,12 @@ from decimal import Decimal
 
 class BaseDB:
     
-    # Dictionary to store performance data
-    performance_data = {}
         
     def __init__(self, file_name, threads, records):
-        self.threads = threads
-        self.records = records
+        
+        self.num_threads = threads
+        self.num_records = records
+        self.performance_data = {}
         self.file_name = file_name
    
 
@@ -59,12 +59,10 @@ class BaseDB:
     def execute(self):
 
         instrument_json = self.get_instrument_json()
-        # Number of threads
-        num_threads = 2
 
         # Create and start the threads for record creation
         create_threads = []
-        for i in range(num_threads):
+        for i in range(self.num_threads):
             thread = threading.Thread(target=self.create_records, args=(i, instrument_json))
             create_threads.append(thread)
             thread.start()
@@ -75,7 +73,7 @@ class BaseDB:
 
         # Create and start threads for reading records
         read_threads = []
-        for i in range(num_threads):
+        for i in range(self.num_threads):
             thread = threading.Thread(target=self.read_records, args=(i,))
             read_threads.append(thread)
             thread.start()

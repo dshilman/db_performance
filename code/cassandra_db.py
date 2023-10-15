@@ -20,6 +20,8 @@ class CassandraDB(BaseDB):
 
     def __init__(self, file_name, threads, records):
 
+        super().__init__(file_name=file_name, threads=threads, records=records)
+
         # Cassandra Keyspaces configuration
         self.contact_points = ['cassandra.us-east-1.amazonaws.com']
         self.username = 'edxProjectUser-at-597782288487'
@@ -38,7 +40,6 @@ class CassandraDB(BaseDB):
                                ssl_context=self.ssl_context, auth_provider=self.auth_provider, port=9142)
         self.session = self.cluster.connect(self.keyspace_name)
 
-        super().__init__(file_name=file_name, threads=2, records=2)
 
     # Function to create records in Keyspaces :)
 
@@ -46,7 +47,7 @@ class CassandraDB(BaseDB):
 
         value = json.dumps(instrument_json, cls=DecimalEncoder).encode()
 
-        for i in range(1, super().records):
+        for i in range(1, self.num_records):
             key = ascii(str(thread_id * 10 + i))
             query = SimpleStatement(
                 f"INSERT INTO db_performance.instruments (key, ticker, data) VALUES ({key}, 'APPL', $${value}$$);", consistency_level=ConsistencyLevel.LOCAL_QUORUM)
@@ -56,18 +57,18 @@ class CassandraDB(BaseDB):
             end_time = time.time()
             execution_time = end_time - start_time
 
-            super().performance_data[key] = {'Create Time': execution_time}
+            self.performance_data[key] = {'Create Time': execution_time}
 
     # Function to read records from Keyspaces
     def read_records(self, thread_id):
 
-        for key in super().performance_data.keys():
+        for key in self.performance_data.keys():
             start_time = time.time()
             query = f"SELECT data FROM db_performance.instruments WHERE key = {key}"
             self.session.execute(query)
             end_time = time.time()
             execution_time = end_time - start_time
-            super().performance_data[key]['Read Time'] = execution_time
+            self.performance_data[key]['Read Time'] = execution_time
 
 
 if __name__ == "__main__":
