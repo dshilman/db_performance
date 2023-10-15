@@ -49,7 +49,7 @@ class CassandraDB(BaseDB):
         for i in range(1, super().records):
             key = ascii(str(thread_id * 10 + i))
             query = SimpleStatement(
-                f"INSERT INTO db_performance.instruments (key, ticker, data) VALUES ({key}, 'APPL', $${value}$$);", consistency_level=ConsistencyLevel.QUORUM)
+                f"INSERT INTO db_performance.instruments (key, ticker, data) VALUES ({key}, 'APPL', $${value}$$);", consistency_level=ConsistencyLevel.LOCAL_QUORUM)
 
             start_time = time.time()
             self.session.execute(query)
