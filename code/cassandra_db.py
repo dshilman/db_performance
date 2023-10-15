@@ -37,14 +37,14 @@ class CassandraDB(BaseDB):
         super().__init__(file_name=file_name, threads=2, records=2)
 
 
-    # Function to create records in Keyspaces
+    # Function to create records in Keyspaces :)
     def create_records(self, thread_id, instrument_json):
 
         value = json.dumps(instrument_json, cls=DecimalEncoder)
 
         for i in range(1, super().records):
             key = str(thread_id * 10 + i)
-            query = f"INSERT INTO instruments (key, data1) VALUES ({key}, textAsBlob({value}));"
+            query = f"INSERT INTO instruments (key, data1) VALUES ({key}, {value});"
 
             start_time = time.time()
             self.session.execute(query)
