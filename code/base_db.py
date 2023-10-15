@@ -11,8 +11,8 @@ class BaseDB:
     performance_data = {}
         
     def __init__(self, file_name, threads, records):
-        threads = threads
-        records = records
+        self.threads = threads
+        self.records = records
         self.file_name = file_name
    
 
