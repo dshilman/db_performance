@@ -9,10 +9,8 @@ class BaseDB:
     
     # Dictionary to store performance data
     performance_data = {}
-    threads = 2
-    records = 2
         
-    def __init__(self, file_name, threads=2, records=2):
+    def __init__(self, file_name, threads, records):
         threads = threads
         records = records
         self.file_name = file_name
@@ -28,7 +26,7 @@ class BaseDB:
                 return data
 
         except FileNotFoundError:
-            print(f"File not found: {file_name}")
+            print(f"File not found: {self.file_name}")
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON: {e}")
 
