@@ -1,9 +1,18 @@
 import time
 import json
+from decimal import Decimal
 from cassandra.cluster import Cluster
 from ssl import SSLContext, PROTOCOL_TLSv1_2 , CERT_REQUIRED
 from cassandra.auth import PlainTextAuthProvider
 from base_db import BaseDB
+
+
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, Decimal):
+            return (str(o) for o in [o])
+        return super(DecimalEncoder, self).default(o)
+
 
 class CassandraDB(BaseDB):
 
@@ -32,11 +41,12 @@ class CassandraDB(BaseDB):
     # Function to create records in Keyspaces
     def create_records(self, thread_id, instrument_json):
 
+        value = json.dumps(instrument_json, cls=DecimalEncoder)
+    
         for i in range(1, super().records):
             key = str(thread_id * 10 + i)
             start_time = time.time()
-            
-            query = f"INSERT INTO instruments (key, data1) VALUES ({key}, {instrument_json}')"
+            query = f"INSERT INTO instruments (key, data1) VALUES ({key}, {value}')"
             self.session.execute(query)
             end_time = time.time()
             execution_time = end_time - start_time
