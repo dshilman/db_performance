@@ -5,12 +5,12 @@ import statistics
 
 class BaseDB:
     
-    def __init__(self):
-        self.performance_data = {}
-
-
     # Dictionary to store performance data
-
+    performance_data = {}
+    
+    def __init__(self):
+        pass
+    
 
     def get_instrument_json(self, file_name):
         try:
@@ -38,8 +38,6 @@ class BaseDB:
 
         # Create a Pandas DataFrame from performance data
         df = pd.DataFrame.from_dict(self.performance_data, orient='index')
-
-        print
 
         # Calculate mean and standard deviation for each column
         create_mean = statistics.mean(df['Create Time'])

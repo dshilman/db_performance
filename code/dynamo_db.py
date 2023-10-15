@@ -10,7 +10,7 @@ class DynamoDB (BaseDB):
         self.dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
         self.table_name = 'Instruments'
         self.table = self.dynamodb.Table(self.table_name)
-        BaseDB.__init__()
+        super().__init__()
 
     # Function to create records in DynamoDB
     def create_records(self, thread_id, instrument_json):
