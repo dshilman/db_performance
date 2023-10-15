@@ -1,7 +1,6 @@
 import time
 import json
 from decimal import Decimal
-from cassandra.
 from cassandra.cluster import Cluster
 from ssl import SSLContext, PROTOCOL_TLSv1_2 , CERT_REQUIRED
 from cassandra.auth import PlainTextAuthProvider
