@@ -14,7 +14,7 @@ class DynamoDB (BaseDB):
 
     # Function to create records in DynamoDB
     def create_records(self, thread_id, instrument_json):
-        for i in range(1, 11):
+        for i in range(1, 2):
             key = str(thread_id * 10 + i)
             start_time = time.time()
             item = {
