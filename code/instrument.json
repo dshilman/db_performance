@@ -1,0 +1,519 @@
+{
+    "assetProfile": {
+      "address1": "One Apple Park Way",
+      "city": "Cupertino",
+      "state": "CA",
+      "zip": "95014",
+      "country": "United States",
+      "phone": "408 996 1010",
+      "website": "https://www.apple.com",
+      "industry": "Consumer Electronics",
+      "industryKey": "consumer-electronics",
+      "industryDisp": "Consumer Electronics",
+      "sector": "Technology",
+      "sectorKey": "technology",
+      "sectorDisp": "Technology",
+      "longBusinessSummary": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, and HomePod. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts. In addition, the company offers various services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV+, which offers exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers, wholesalers, retailers, and resellers. Apple Inc. was incorporated in 1977 and is headquartered in Cupertino, California.",
+      "fullTimeEmployees": 164000,
+      "companyOfficers": [
+        {
+          "maxAge": 1,
+          "name": "Mr. Timothy D. Cook",
+          "age": 61,
+          "title": "CEO & Director",
+          "yearBorn": 1961,
+          "fiscalYear": 2022,
+          "totalPay": {
+            "raw": 16425933,
+            "fmt": "16.43M",
+            "longFmt": "16,425,933"
+          },
+          "exercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          },
+          "unexercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          }
+        },
+        {
+          "maxAge": 1,
+          "name": "Mr. Luca  Maestri",
+          "age": 59,
+          "title": "CFO & Senior VP",
+          "yearBorn": 1963,
+          "fiscalYear": 2022,
+          "totalPay": {
+            "raw": 5019783,
+            "fmt": "5.02M",
+            "longFmt": "5,019,783"
+          },
+          "exercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          },
+          "unexercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          }
+        },
+        {
+          "maxAge": 1,
+          "name": "Mr. Jeffrey E. Williams",
+          "age": 58,
+          "title": "Chief Operating Officer",
+          "yearBorn": 1964,
+          "fiscalYear": 2022,
+          "totalPay": {
+            "raw": 5018337,
+            "fmt": "5.02M",
+            "longFmt": "5,018,337"
+          },
+          "exercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          },
+          "unexercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          }
+        },
+        {
+          "maxAge": 1,
+          "name": "Ms. Katherine L. Adams",
+          "age": 58,
+          "title": "Senior VP, General Counsel & Secretary",
+          "yearBorn": 1964,
+          "fiscalYear": 2022,
+          "totalPay": {
+            "raw": 5015208,
+            "fmt": "5.02M",
+            "longFmt": "5,015,208"
+          },
+          "exercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          },
+          "unexercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          }
+        },
+        {
+          "maxAge": 1,
+          "name": "Ms. Deirdre  O'Brien",
+          "age": 55,
+          "title": "Senior Vice President of Retail",
+          "yearBorn": 1967,
+          "fiscalYear": 2022,
+          "totalPay": {
+            "raw": 5019783,
+            "fmt": "5.02M",
+            "longFmt": "5,019,783"
+          },
+          "exercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          },
+          "unexercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          }
+        },
+        {
+          "maxAge": 1,
+          "name": "Mr. Chris  Kondo",
+          "title": "Senior Director of Corporate Accounting",
+          "fiscalYear": 2022,
+          "exercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          },
+          "unexercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          }
+        },
+        {
+          "maxAge": 1,
+          "name": "Mr. James  Wilson",
+          "title": "Chief Technology Officer",
+          "fiscalYear": 2022,
+          "exercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          },
+          "unexercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          }
+        },
+        {
+          "maxAge": 1,
+          "name": "Ms. Mary  Demby",
+          "title": "Chief Information Officer",
+          "fiscalYear": 2022,
+          "exercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          },
+          "unexercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          }
+        },
+        {
+          "maxAge": 1,
+          "name": "Ms. Nancy  Paxton",
+          "title": "Senior Director of Investor Relations & Treasury",
+          "fiscalYear": 2022,
+          "exercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          },
+          "unexercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          }
+        },
+        {
+          "maxAge": 1,
+          "name": "Mr. Greg  Joswiak",
+          "title": "Senior Vice President of Worldwide Marketing",
+          "fiscalYear": 2022,
+          "exercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          },
+          "unexercisedValue": {
+            "raw": 0,
+            "fmt": null,
+            "longFmt": "0"
+          }
+        }
+      ],
+      "auditRisk": 4,
+      "boardRisk": 1,
+      "compensationRisk": 5,
+      "shareHolderRightsRisk": 1,
+      "overallRisk": 1,
+      "governanceEpochDate": 1696118400,
+      "compensationAsOfEpochDate": 1672444800,
+      "maxAge": 86400
+    },
+    "earnings": {
+      "maxAge": 86400,
+      "earningsChart": {
+        "quarterly": [
+          {
+            "date": "3Q2022",
+            "actual": {
+              "raw": 1.29,
+              "fmt": "1.29"
+            },
+            "estimate": {
+              "raw": 1.27,
+              "fmt": "1.27"
+            }
+          },
+          {
+            "date": "4Q2022",
+            "actual": {
+              "raw": 1.88,
+              "fmt": "1.88"
+            },
+            "estimate": {
+              "raw": 1.94,
+              "fmt": "1.94"
+            }
+          },
+          {
+            "date": "1Q2023",
+            "actual": {
+              "raw": 1.52,
+              "fmt": "1.52"
+            },
+            "estimate": {
+              "raw": 1.43,
+              "fmt": "1.43"
+            }
+          },
+          {
+            "date": "2Q2023",
+            "actual": {
+              "raw": 1.26,
+              "fmt": "1.26"
+            },
+            "estimate": {
+              "raw": 1.19,
+              "fmt": "1.19"
+            }
+          }
+        ],
+        "currentQuarterEstimate": {
+          "raw": 1.39,
+          "fmt": "1.39"
+        },
+        "currentQuarterEstimateDate": "3Q",
+        "currentQuarterEstimateYear": 2023,
+        "earningsDate": [
+          {
+            "raw": 1698955200,
+            "fmt": "2023-11-02"
+          }
+        ]
+      },
+      "financialsChart": {
+        "yearly": [
+          {
+            "date": 2019,
+            "revenue": {
+              "raw": 260174000000,
+              "fmt": "260.17B",
+              "longFmt": "260,174,000,000"
+            },
+            "earnings": {
+              "raw": 55256000000,
+              "fmt": "55.26B",
+              "longFmt": "55,256,000,000"
+            }
+          },
+          {
+            "date": 2020,
+            "revenue": {
+              "raw": 274515000000,
+              "fmt": "274.51B",
+              "longFmt": "274,515,000,000"
+            },
+            "earnings": {
+              "raw": 57411000000,
+              "fmt": "57.41B",
+              "longFmt": "57,411,000,000"
+            }
+          },
+          {
+            "date": 2021,
+            "revenue": {
+              "raw": 365817000000,
+              "fmt": "365.82B",
+              "longFmt": "365,817,000,000"
+            },
+            "earnings": {
+              "raw": 94680000000,
+              "fmt": "94.68B",
+              "longFmt": "94,680,000,000"
+            }
+          },
+          {
+            "date": 2022,
+            "revenue": {
+              "raw": 394328000000,
+              "fmt": "394.33B",
+              "longFmt": "394,328,000,000"
+            },
+            "earnings": {
+              "raw": 99803000000,
+              "fmt": "99.8B",
+              "longFmt": "99,803,000,000"
+            }
+          }
+        ],
+        "quarterly": [
+          {
+            "date": "3Q2022",
+            "revenue": {
+              "raw": 90146000000,
+              "fmt": "90.15B",
+              "longFmt": "90,146,000,000"
+            },
+            "earnings": {
+              "raw": 20721000000,
+              "fmt": "20.72B",
+              "longFmt": "20,721,000,000"
+            }
+          },
+          {
+            "date": "4Q2022",
+            "revenue": {
+              "raw": 117154000000,
+              "fmt": "117.15B",
+              "longFmt": "117,154,000,000"
+            },
+            "earnings": {
+              "raw": 29998000000,
+              "fmt": "30B",
+              "longFmt": "29,998,000,000"
+            }
+          },
+          {
+            "date": "2Q2023",
+            "revenue": {
+              "raw": 0,
+              "fmt": null,
+              "longFmt": "0"
+            },
+            "earnings": {
+              "raw": 0,
+              "fmt": null,
+              "longFmt": "0"
+            }
+          },
+          {
+            "date": "3Q2023",
+            "revenue": {
+              "raw": 81797000000,
+              "fmt": "81.8B",
+              "longFmt": "81,797,000,000"
+            },
+            "earnings": {
+              "raw": 19881000000,
+              "fmt": "19.88B",
+              "longFmt": "19,881,000,000"
+            }
+          }
+        ]
+      },
+      "financialCurrency": "USD"
+    },
+    "financialData": {
+      "maxAge": 86400,
+      "currentPrice": {
+        "raw": 178.85,
+        "fmt": "178.85"
+      },
+      "targetHighPrice": {
+        "raw": 240,
+        "fmt": "240.00"
+      },
+      "targetLowPrice": {
+        "raw": 149,
+        "fmt": "149.00"
+      },
+      "targetMeanPrice": {
+        "raw": 199.56,
+        "fmt": "199.56"
+      },
+      "targetMedianPrice": {
+        "raw": 200,
+        "fmt": "200.00"
+      },
+      "recommendationMean": {
+        "raw": 2,
+        "fmt": "2.00"
+      },
+      "recommendationKey": "buy",
+      "numberOfAnalystOpinions": {
+        "raw": 36,
+        "fmt": "36",
+        "longFmt": "36"
+      },
+      "totalCash": {
+        "raw": 62482001920,
+        "fmt": "62.48B",
+        "longFmt": "62,482,001,920"
+      },
+      "totalCashPerShare": {
+        "raw": 3.996,
+        "fmt": "4"
+      },
+      "ebitda": {
+        "raw": 123957002240,
+        "fmt": "123.96B",
+        "longFmt": "123,957,002,240"
+      },
+      "totalDebt": {
+        "raw": 109280002048,
+        "fmt": "109.28B",
+        "longFmt": "109,280,002,048"
+      },
+      "quickRatio": {
+        "raw": 0.814,
+        "fmt": "0.81"
+      },
+      "currentRatio": {
+        "raw": 0.982,
+        "fmt": "0.98"
+      },
+      "totalRevenue": {
+        "raw": 383932989440,
+        "fmt": "383.93B",
+        "longFmt": "383,932,989,440"
+      },
+      "debtToEquity": {
+        "raw": 181.305,
+        "fmt": "181.30%"
+      },
+      "revenuePerShare": {
+        "raw": 24.22,
+        "fmt": "24.22"
+      },
+      "returnOnAssets": {
+        "raw": 0.20896,
+        "fmt": "20.90%"
+      },
+      "returnOnEquity": {
+        "raw": 1.60093,
+        "fmt": "160.09%"
+      },
+      "grossProfits": {
+        "raw": 170782000000,
+        "fmt": "170.78B",
+        "longFmt": "170,782,000,000"
+      },
+      "freeCashflow": {
+        "raw": 90680500224,
+        "fmt": "90.68B",
+        "longFmt": "90,680,500,224"
+      },
+      "operatingCashflow": {
+        "raw": 113071996928,
+        "fmt": "113.07B",
+        "longFmt": "113,071,996,928"
+      },
+      "earningsGrowth": {
+        "raw": 0.05,
+        "fmt": "5.00%"
+      },
+      "revenueGrowth": {
+        "raw": -0.014,
+        "fmt": "-1.40%"
+      },
+      "grossMargins": {
+        "raw": 0.43449003,
+        "fmt": "43.45%"
+      },
+      "ebitdaMargins": {
+        "raw": 0.32286,
+        "fmt": "32.29%"
+      },
+      "operatingMargins": {
+        "raw": 0.28116,
+        "fmt": "28.12%"
+      },
+      "profitMargins": {
+        "raw": 0.24681,
+        "fmt": "24.68%"
+      },
+      "financialCurrency": "USD"
+    }
+  }

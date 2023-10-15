@@ -8,8 +8,8 @@ class DynamoDB (BaseDB):
     def __init__(self):
 
         # AWS DynamoDB configuration
-        self.dynamodb = boto3.resource('dynamodb', region_name='your_region_name')
-        self.table_name = 'your_table_name'
+        self.dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+        self.table_name = 'Instruments'
         self.table = self.dynamodb.Table(self.table_name)
         super().__init__()
 
@@ -38,5 +38,5 @@ class DynamoDB (BaseDB):
 
 if __name__ == "__main__":
 
-    file_name = 'yahoo.json'
+    file_name = 'instrument.json'
     DynamoDB().execute(file_name)
