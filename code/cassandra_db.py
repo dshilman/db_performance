@@ -48,9 +48,9 @@ class CassandraDB(BaseDB):
         value = json.dumps(instrument_json, cls=DecimalEncoder).encode()
 
         for i in range(1, self.num_records):
-            key = ascii(str(thread_id * 10 + i))
+            key = int(thread_id * 100 + i)
             query = SimpleStatement(
-                f"INSERT INTO db_performance.instruments (key, ticker, data) VALUES ({key}, 'APPL', $${value}$$);", consistency_level=ConsistencyLevel.LOCAL_QUORUM)
+                f"INSERT INTO db_performance.instruments (key, data) VALUES ({key}, $${value}$$);", consistency_level=ConsistencyLevel.LOCAL_QUORUM)
 
             start_time = time.time()
             self.session.execute(query)

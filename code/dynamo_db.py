@@ -17,7 +17,7 @@ class DynamoDB (BaseDB):
     def create_records(self, thread_id, instrument_json):
 
         for i in range(1, self.num_records):
-            key = str(thread_id * 10 + i)
+            key = int(thread_id * 100 + i)
             item = {
                 'Key': key,
                 'Data': instrument_json
