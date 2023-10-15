@@ -63,7 +63,7 @@ class CassandraDB(BaseDB):
 
         for key in super().performance_data.keys():
             start_time = time.time()
-            query = f"SELECT data1 FROM your_table_name WHERE key = {key}"
+            query = f"SELECT data FROM db_performance.instruments WHERE key = {key}"
             self.session.execute(query)
             end_time = time.time()
             execution_time = end_time - start_time
