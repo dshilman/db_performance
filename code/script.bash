@@ -1,3 +1,3 @@
-sudo apt install git-all
+sudo yum install git
 git clone
-sudo apt-get install python3
+sudo yum install python3

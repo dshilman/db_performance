@@ -4,6 +4,7 @@ import pandas as pd
 import statistics
 
 class BaseDB:
+    
     def __init__(self):
         self.performance_data = {}
 
@@ -38,6 +39,8 @@ class BaseDB:
         # Create a Pandas DataFrame from performance data
         df = pd.DataFrame.from_dict(self.performance_data, orient='index')
 
+        print
+
         # Calculate mean and standard deviation for each column
         create_mean = statistics.mean(df['Create Time'])
         read_mean = statistics.mean(df['Read Time'])
@@ -55,7 +58,7 @@ class BaseDB:
 
         instrument_json = self.get_instrument_json(file_name)
         # Number of threads
-        num_threads = 5
+        num_threads = 2
 
         # Create and start the threads for record creation
         create_threads = []
