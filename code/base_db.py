@@ -10,13 +10,15 @@ class BaseDB:
     # Dictionary to store performance data
     performance_data = {}
     
-    def __init__(self):
-        pass
-    
+    def __init__(self, file_name, threads, records):
+        self.threads = threads
+        self.records = records
+        self.file_name = file_name
+   
 
-    def get_instrument_json(self, file_name):
+    def get_instrument_json(self):
         try:
-            with open(file_name, 'r') as json_file:
+            with open(self.file_name, 'r') as json_file:
                 # Load the JSON data into a Python dictionary
                 data = json.load(json_file, parse_float=Decimal)
                 # print(data)  # You can now work with the 'data' dictionary
@@ -54,7 +56,7 @@ class BaseDB:
         print(f"Create Standard Deviation: {create_std}")
         print(f"Read Standard Deviation: {read_std}")
 
-    def execute(self, file_name):
+    def execute(self):
 
         instrument_json = self.get_instrument_json(file_name)
         # Number of threads

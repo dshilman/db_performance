@@ -7,7 +7,7 @@ from base_db import BaseDB
 
 class CassandraDB(BaseDB):
 
-    def __init__(self):
+    def __init__(self, file_name, threads, records):
 
         # Cassandra Keyspaces configuration
         self.contact_points = ['cassandra.us-east-1.amazonaws.com']
@@ -20,7 +20,7 @@ class CassandraDB(BaseDB):
         self.cluster = Cluster(contact_points=self.contact_points, auth_provider=self.auth_provider)
         self.session = self.cluster.connect(self.keyspace_name)
 
-        super().__init__()
+        super().__init__(file_name=file_name, threads=2, records=2)
 
 
     # Function to create records in Keyspaces
@@ -51,4 +51,4 @@ class CassandraDB(BaseDB):
 if __name__ == "__main__":
 
     file_name = 'instrument.json'
-    CassandraDB().execute(file_name)
+    CassandraDB(file_name=file_name, threads=2, records=2).execute()
