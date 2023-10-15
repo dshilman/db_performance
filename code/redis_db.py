@@ -15,7 +15,7 @@ class RedisDB (BaseDB):
         # self.redis_db = 0  # Redis database number
         # self.redis_password = 'your_redis_password'
 
-        self.r = Redis.StrictRedis(host=self.redis_host, port=self.redis_port)
+        self.r = Redis(host=self.redis_host, port=self.redis_port)
 
     # Function to create records in DynamoDB
     def create_records(self, thread_id, instrument_json):
