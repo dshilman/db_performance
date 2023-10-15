@@ -26,7 +26,7 @@ class CassandraDB(BaseDB):
     # Function to create records in Keyspaces
     def create_records(self, thread_id, instrument_json):
 
-        for i in range(1, 11):
+        for i in range(1, super().records):
             key = str(thread_id * 10 + i)
             start_time = time.time()
             value = json.dumps(instrument_json)
