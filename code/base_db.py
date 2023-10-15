@@ -2,6 +2,8 @@ import threading
 import json
 import pandas as pd
 import statistics
+from decimal import Decimal
+
 
 class BaseDB:
     
@@ -16,7 +18,7 @@ class BaseDB:
         try:
             with open(file_name, 'r') as json_file:
                 # Load the JSON data into a Python dictionary
-                data = json.load(json_file)
+                data = json.load(json_file, parse_float=Decimal)
                 # print(data)  # You can now work with the 'data' dictionary
 
                 return data
