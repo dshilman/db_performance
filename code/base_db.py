@@ -58,7 +58,7 @@ class BaseDB:
 
     def execute(self):
 
-        instrument_json = self.get_instrument_json(file_name)
+        instrument_json = self.get_instrument_json(self.file_name)
         # Number of threads
         num_threads = 2
 
