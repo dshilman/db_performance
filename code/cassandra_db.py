@@ -44,7 +44,7 @@ class CassandraDB(BaseDB):
 
         for i in range(1, super().records):
             key = str(thread_id * 10 + i)
-            query = f"INSERT INTO instruments (key, data1) VALUES ({key}, {value});"
+            query = f"INSERT INTO db_performance.instruments (key, data1) VALUES ({key}, {value});"
 
             start_time = time.time()
             self.session.execute(query)
