@@ -1,6 +1,7 @@
 import time
 import json
 from decimal import Decimal
+from cassandra.
 from cassandra.cluster import Cluster
 from ssl import SSLContext, PROTOCOL_TLSv1_2 , CERT_REQUIRED
 from cassandra.auth import PlainTextAuthProvider
@@ -42,14 +43,12 @@ class CassandraDB(BaseDB):
 
         value = json.dumps(instrument_json, cls=DecimalEncoder)
 
-        query = "INSERT INTO instruments (key, data) VALUES (?, ?)"
-
         for i in range(1, super().records):
             key = str(thread_id * 10 + i)
-            pStatement = self.session.prepare(query)
+            query = f"INSERT INTO instruments (key, data) VALUES ({key}, \'{value}\');"
 
             start_time = time.time()
-            self.session.execute(pStatement, [key, value])
+            self.session.execute(query)
             end_time = time.time()
             execution_time = end_time - start_time
 
