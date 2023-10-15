@@ -9,10 +9,12 @@ class BaseDB:
     
     # Dictionary to store performance data
     performance_data = {}
-    
-    def __init__(self, file_name, threads, records):
-        self.threads = threads
-        self.records = records
+    threads = 2
+    records = 2
+        
+    def __init__(self, file_name, threads=2, records=2):
+        threads = threads
+        records = records
         self.file_name = file_name
    
 
