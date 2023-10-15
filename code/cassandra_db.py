@@ -8,11 +8,10 @@ from base_db import BaseDB
 
 
 class DecimalEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, Decimal):
-            return (str(o) for o in [o])
-        return super(DecimalEncoder, self).default(o)
-
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return str(obj)
+        return json.JSONEncoder.default(self, obj)
 
 class CassandraDB(BaseDB):
 
