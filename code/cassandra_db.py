@@ -35,8 +35,8 @@ class CassandraDB(BaseDB):
         for i in range(1, super().records):
             key = str(thread_id * 10 + i)
             start_time = time.time()
-            value = json.dumps(instrument_json)
-            query = f"INSERT INTO instruments (key, data) VALUES ({key}, {value}')"
+            
+            query = f"INSERT INTO instruments (key, data) VALUES ({key}, {instrument_json}')"
             self.session.execute(query)
             end_time = time.time()
             execution_time = end_time - start_time
