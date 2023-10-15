@@ -16,8 +16,14 @@ class CassandraDB(BaseDB):
         self.keyspace_name = 'db_performance'
 
         # Create a cluster connection
+
+        self.ssl_context = SSLContext(PROTOCOL_TLSv1_2 )
+        self.ssl_context.load_verify_locations('sf-class2-root.crt')
+        self.ssl_context.verify_mode = CERT_REQUIRED
+        
+
         self.auth_provider = PlainTextAuthProvider(username=self.username, password=self.password)
-        self.cluster = Cluster(contact_points=self.contact_points, auth_provider=self.auth_provider)
+        self.cluster = Cluster(contact_points=self.contact_points, ssl_context=self.ssl_context, auth_provider=self.auth_provider, port=9142)
         self.session = self.cluster.connect(self.keyspace_name)
 
         super().__init__(file_name=file_name, threads=2, records=2)
