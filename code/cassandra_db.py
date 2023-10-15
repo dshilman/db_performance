@@ -2,7 +2,9 @@ import time
 import json
 from decimal import Decimal
 from cassandra.cluster import Cluster
-from ssl import SSLContext, PROTOCOL_TLSv1_2 , CERT_REQUIRED
+from cassandra import ConsistencyLevel
+from cassandra.query import SimpleStatement
+from ssl import SSLContext, PROTOCOL_TLSv1_2, CERT_REQUIRED
 from cassandra.auth import PlainTextAuthProvider
 from base_db import BaseDB
 
@@ -12,6 +14,7 @@ class DecimalEncoder(json.JSONEncoder):
         if isinstance(obj, Decimal):
             return str(obj)
         return json.JSONEncoder.default(self, obj)
+
 
 class CassandraDB(BaseDB):
 
@@ -25,26 +28,28 @@ class CassandraDB(BaseDB):
 
         # Create a cluster connection
 
-        self.ssl_context = SSLContext(PROTOCOL_TLSv1_2 )
+        self.ssl_context = SSLContext(PROTOCOL_TLSv1_2)
         self.ssl_context.load_verify_locations('sf-class2-root.crt')
         self.ssl_context.verify_mode = CERT_REQUIRED
-        
 
-        self.auth_provider = PlainTextAuthProvider(username=self.username, password=self.password)
-        self.cluster = Cluster(contact_points=self.contact_points, ssl_context=self.ssl_context, auth_provider=self.auth_provider, port=9142)
+        self.auth_provider = PlainTextAuthProvider(
+            username=self.username, password=self.password)
+        self.cluster = Cluster(contact_points=self.contact_points,
+                               ssl_context=self.ssl_context, auth_provider=self.auth_provider, port=9142)
         self.session = self.cluster.connect(self.keyspace_name)
 
         super().__init__(file_name=file_name, threads=2, records=2)
 
-
     # Function to create records in Keyspaces :)
+
     def create_records(self, thread_id, instrument_json):
 
         value = json.dumps(instrument_json, cls=DecimalEncoder).encode()
 
         for i in range(1, super().records):
             key = ascii(str(thread_id * 10 + i))
-            query = f"INSERT INTO db_performance.instruments (key, data) VALUES ({key}, $${value}$$);"
+            query = SimpleStatement(
+                f"INSERT INTO db_performance.instruments (key, ticker, data) VALUES ({key}, 'APPL', $${value}$$);", consistency_level=ConsistencyLevel.QUORUM)
 
             start_time = time.time()
             self.session.execute(query)
@@ -63,6 +68,7 @@ class CassandraDB(BaseDB):
             end_time = time.time()
             execution_time = end_time - start_time
             super().performance_data[key]['Read Time'] = execution_time
+
 
 if __name__ == "__main__":
 
