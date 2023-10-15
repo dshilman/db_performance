@@ -36,7 +36,7 @@ class CassandraDB(BaseDB):
             key = str(thread_id * 10 + i)
             start_time = time.time()
             
-            query = f"INSERT INTO instruments (key, data) VALUES ({key}, {instrument_json}')"
+            query = f"INSERT INTO instruments (key, data1) VALUES ({key}, {instrument_json}')"
             self.session.execute(query)
             end_time = time.time()
             execution_time = end_time - start_time
@@ -48,7 +48,7 @@ class CassandraDB(BaseDB):
 
         for key in super().performance_data.keys():
             start_time = time.time()
-            query = f"SELECT data FROM your_table_name WHERE key = {key}"
+            query = f"SELECT data1 FROM your_table_name WHERE key = {key}"
             self.session.execute(query)
             end_time = time.time()
             execution_time = end_time - start_time
