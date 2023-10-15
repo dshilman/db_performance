@@ -1,6 +1,5 @@
 import time
 import boto3
-import pandas as pd
 from base_db import BaseDB
 
 class DynamoDB (BaseDB):
@@ -29,7 +28,7 @@ class DynamoDB (BaseDB):
 
     # Function to read records from DynamoDB
     def read_records(self, thread_id):
-        for key in super.performance_data.keys():
+        for key in super().performance_data.keys():
             start_time = time.time()
             response = self.table.get_item(Key={'Key': key})
             end_time = time.time()
