@@ -11,16 +11,15 @@ class DecimalEncoder(json.JSONEncoder):
             return str(obj)
         return json.JSONEncoder.default(self, obj)
 
+
 class BaseDB:
-    
-        
+
     def __init__(self, file_name, threads, records):
-        
+
         self.num_threads = threads
         self.num_records = records
         self.performance_data = {}
         self.file_name = file_name
-   
 
     def get_instrument_json(self):
         try:
@@ -51,6 +50,7 @@ class BaseDB:
             df = pd.DataFrame.from_dict(self.performance_data, orient='index')
 
             if not df.empty:
+                df.sort_index(inplace=True)
                 # Calculate mean and standard deviation for each column
                 create_mean = statistics.mean(df['Create Time'])
                 read_mean = statistics.mean(df['Read Time'])
@@ -59,10 +59,8 @@ class BaseDB:
 
                 print("Performance Data:")
                 print(df)
-                print(f"Create Mean Time: {create_mean}")
-                print(f"Read Mean Time: {read_mean}")
-                print(f"Create Standard Deviation: {create_std}")
-                print(f"Read Standard Deviation: {read_std}")
+                print(f"Create Time mean: {create_mean}, std: {create_std}")
+                print(f"Read Time mean: {read_mean}, std: {read_std}")
 
     def execute(self):
 
@@ -71,7 +69,8 @@ class BaseDB:
         # Create and start the threads for record creation
         create_threads = []
         for i in range(self.num_threads):
-            thread = threading.Thread(target=self.create_records, args=(i, instrument_json))
+            thread = threading.Thread(
+                target=self.create_records, args=(i, instrument_json))
             create_threads.append(thread)
             thread.start()
 
@@ -91,5 +90,3 @@ class BaseDB:
             thread.join()
 
         self.print_stats()
-
-
