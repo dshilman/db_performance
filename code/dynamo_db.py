@@ -34,7 +34,7 @@ class DynamoDB (BaseDB):
         
         for key in self.performance_data.keys():
             start_time = time.time()
-            response = self.table.get_item(Key={'Key': key})
+            response = self.table.get_item(Key={'key': key})
             end_time = time.time()
             execution_time = end_time - start_time
             self.performance_data[key]['Read Time'] = execution_time
