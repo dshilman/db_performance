@@ -27,7 +27,7 @@ class RedisDB (BaseDB):
         for i in range(1, self.num_records):
             key = int(thread_id * 100 + i)
             start_time = time.time()
-            self.redis.set(key, instrument_json)
+            self.redis.set(key, value)
             end_time = time.time()
             execution_time = end_time - start_time
             self.performance_data[key] = {'Create Time': execution_time}
