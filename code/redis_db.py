@@ -37,7 +37,7 @@ class RedisDB (BaseDB):
      
         for key in self.performance_data.keys():
             start_time = time.time()
-            value = self.redis.get(key)
+            value = self.redis.get(str(key))
             end_time = time.time()
             execution_time = end_time - start_time
             self.performance_data[key]['Read Time'] = execution_time
