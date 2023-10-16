@@ -50,7 +50,7 @@ class BaseDB:
             # Create a Pandas DataFrame from performance data
             df = pd.DataFrame.from_dict(self.performance_data, orient='index')
 
-            if not df.empty():
+            if not df.empty:
                 # Calculate mean and standard deviation for each column
                 create_mean = statistics.mean(df['Create Time'])
                 read_mean = statistics.mean(df['Read Time'])
@@ -82,7 +82,7 @@ class BaseDB:
         # Create and start threads for reading records
         read_threads = []
         for i in range(self.num_threads):
-            thread = threading.Thread(target=self.read_records, args=(i))
+            thread = threading.Thread(target=self.read_records, args=(i,))
             read_threads.append(thread)
             thread.start()
 
