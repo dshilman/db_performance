@@ -10,7 +10,7 @@ class DecimalEncoder(json.JSONEncoder):
         if isinstance(obj, Decimal):
             return str(obj)
         return json.JSONEncoder.default(self, obj)
-        
+
 class BaseDB:
     
         
@@ -46,21 +46,23 @@ class BaseDB:
 
     def print_stats(self):
 
-        # Create a Pandas DataFrame from performance data
-        df = pd.DataFrame.from_dict(self.performance_data, orient='index')
+        if len(self.performance_data) > 0:
+            # Create a Pandas DataFrame from performance data
+            df = pd.DataFrame.from_dict(self.performance_data, orient='index')
 
-        # Calculate mean and standard deviation for each column
-        create_mean = statistics.mean(df['Create Time'])
-        read_mean = statistics.mean(df['Read Time'])
-        create_std = statistics.stdev(df['Create Time'])
-        read_std = statistics.stdev(df['Read Time'])
+            if not df.empty():
+                # Calculate mean and standard deviation for each column
+                create_mean = statistics.mean(df['Create Time'])
+                read_mean = statistics.mean(df['Read Time'])
+                create_std = statistics.stdev(df['Create Time'])
+                read_std = statistics.stdev(df['Read Time'])
 
-        print("Performance Data:")
-        print(df)
-        print(f"Create Mean Time: {create_mean}")
-        print(f"Read Mean Time: {read_mean}")
-        print(f"Create Standard Deviation: {create_std}")
-        print(f"Read Standard Deviation: {read_std}")
+                print("Performance Data:")
+                print(df)
+                print(f"Create Mean Time: {create_mean}")
+                print(f"Read Mean Time: {read_mean}")
+                print(f"Create Standard Deviation: {create_std}")
+                print(f"Read Standard Deviation: {read_std}")
 
     def execute(self):
 

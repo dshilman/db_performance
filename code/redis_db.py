@@ -25,7 +25,7 @@ class RedisDB (BaseDB):
         value = json.dumps(instrument_json, cls=DecimalEncoder).encode()
 
         for i in range(1, self.num_records):
-            key = str(thread_id * 100 + i)
+            key = str(int(thread_id * 100 + i))
             start_time = time.time()
             self.redis.set(key, value)
             end_time = time.time()
