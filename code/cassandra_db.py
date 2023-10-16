@@ -7,14 +7,7 @@ from cassandra.query import SimpleStatement
 from ssl import SSLContext, PROTOCOL_TLSv1_2, CERT_REQUIRED
 from cassandra.auth import PlainTextAuthProvider
 from base_db import BaseDB
-
-
-class DecimalEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, Decimal):
-            return str(obj)
-        return json.JSONEncoder.default(self, obj)
-
+from base_db import DecimalEncoder
 
 class CassandraDB(BaseDB):
 

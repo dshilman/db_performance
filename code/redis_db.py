@@ -1,6 +1,8 @@
 import time
 from redis import Redis
 from base_db import BaseDB
+from base_db import DecimalEncoder
+import json
 
 
 class RedisDB (BaseDB):
@@ -15,15 +17,17 @@ class RedisDB (BaseDB):
         # self.redis_db = 0  # Redis database number
         # self.redis_password = 'your_redis_password'
 
-        self.r = Redis(host=self.redis_host, port=self.redis_port)
+        self.redis = Redis(host=self.redis_host, port=self.redis_port, decode_responses=True)
 
     # Function to create records in DynamoDB
     def create_records(self, thread_id, instrument_json):
 
+        value = json.dumps(instrument_json, cls=DecimalEncoder).encode()
+
         for i in range(1, self.num_records):
             key = int(thread_id * 100 + i)
             start_time = time.time()
-            self.r.set(key, instrument_json)
+            self.redis.set(key, instrument_json)
             end_time = time.time()
             execution_time = end_time - start_time
             self.performance_data[key] = {'Create Time': execution_time}
@@ -33,7 +37,7 @@ class RedisDB (BaseDB):
      
         for key in self.performance_data.keys():
             start_time = time.time()
-            value = r.get(key)
+            value = self.redis.get(key)
             end_time = time.time()
             execution_time = end_time - start_time
             self.performance_data[key]['Read Time'] = execution_time
@@ -42,4 +46,4 @@ class RedisDB (BaseDB):
 if __name__ == "__main__":
 
     file_name = 'instrument.json'
-    RedisDB(file_name=file_name, threads=10, records=20).execute()
+    RedisDB(file_name=file_name, threads=2, records=2).execute()
