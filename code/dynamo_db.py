@@ -19,8 +19,8 @@ class DynamoDB (BaseDB):
         for i in range(1, self.num_records):
             key = int(thread_id * 100 + i)
             item = {
-                'Key': key,
-                'Data': instrument_json
+                'key': key,
+                'data': instrument_json
             }
 
             start_time = time.time()
