@@ -1,10 +1,12 @@
 import time
 import json
+import boto3
 from decimal import Decimal
 from cassandra.cluster import Cluster
 from cassandra import ConsistencyLevel
 from cassandra.query import SimpleStatement
 from ssl import SSLContext, PROTOCOL_TLSv1_2, CERT_REQUIRED
+from cassandra_sigv4.auth import SigV4AuthProvider
 from cassandra.auth import PlainTextAuthProvider
 from base_db import BaseDB
 from base_db import DecimalEncoder
@@ -16,22 +18,37 @@ class CassandraDB(BaseDB):
         super().__init__(file_name=file_name, threads=threads, records=records)
 
         # Cassandra Keyspaces configuration
-        self.contact_points = ['cassandra.us-east-1.amazonaws.com']
-        self.username = 'edxProjectUser-at-597782288487'
-        self.password = 'xxiuSzxzaqyjWxB9X+DyAh0vee7In8fJVLqhZYJmlGs='
-        self.keyspace_name = 'db_performance'
+        # contact_points = ['cassandra.us-east-1.amazonaws.com']
+        # username = 'edxProjectUser-at-597782288487'
+        # password = 'xxiuSzxzaqyjWxB9X+DyAh0vee7In8fJVLqhZYJmlGs='
+        keyspace_name = 'db_performance'
 
-        # Create a cluster connection
+        # # Create a cluster connection
 
-        self.ssl_context = SSLContext(PROTOCOL_TLSv1_2)
-        self.ssl_context.load_verify_locations('sf-class2-root.crt')
-        self.ssl_context.verify_mode = CERT_REQUIRED
+        # ssl_context = SSLContext(PROTOCOL_TLSv1_2)
+        # ssl_context.load_verify_locations('sf-class2-root.crt')
+        # ssl_context.verify_mode = CERT_REQUIRED
 
-        self.auth_provider = PlainTextAuthProvider(
-            username=self.username, password=self.password)
-        self.cluster = Cluster(contact_points=self.contact_points,
-                               ssl_context=self.ssl_context, auth_provider=self.auth_provider, port=9142)
-        self.session = self.cluster.connect(self.keyspace_name)
+        # auth_provider = PlainTextAuthProvider(
+        #     username=self.username, password=self.password)
+        # cluster = Cluster(contact_points=self.contact_points,
+        #                        ssl_context=self.ssl_context, auth_provider=self.auth_provider, port=9142)
+        # self.session = self.cluster.connect(keyspace_name)
+
+        ssl_context = SSLContext(PROTOCOL_TLSv1_2)
+        ssl_context.load_verify_locations('sf-class2-root.crt')
+        ssl_context.verify_mode = CERT_REQUIRED
+
+        # use this if you want to use Boto to set the session parameters.
+        boto_session = boto3.Session(region_name="us-east-1")
+        auth_provider = SigV4AuthProvider(boto_session)
+
+        # Use this instead of the above line if you want to use the Default Credentials and not bother with a session.
+        # auth_provider = SigV4AuthProvider()
+
+        cluster = Cluster(['cassandra.us-east-1.amazonaws.com'], ssl_context=ssl_context, auth_provider=auth_provider,
+                        port=9142)
+        self.session = cluster.connect(keyspace_name)
 
 
     # Function to create records in Keyspaces :)

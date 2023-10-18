@@ -2,6 +2,7 @@ import threading
 import json
 import pandas as pd
 import statistics
+import time
 from decimal import Decimal
 
 
@@ -64,6 +65,8 @@ class BaseDB:
 
     def execute(self):
 
+        start_time = time.time()
+
         instrument_json = self.get_instrument_json()
 
         # Create and start the threads for record creation
@@ -88,5 +91,11 @@ class BaseDB:
         # Wait for all read threads to finish
         for thread in read_threads:
             thread.join()
+            
+        end_time = time.time()
+        execution_time = end_time - start_time
+        self.performance_data[key] = {'Create Time': execution_time}
 
         self.print_stats()
+
+        print(f"Execution time: {execution_time}")
