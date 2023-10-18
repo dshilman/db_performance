@@ -91,11 +91,10 @@ class BaseDB:
         # Wait for all read threads to finish
         for thread in read_threads:
             thread.join()
-            
-        end_time = time.time()
-        execution_time = end_time - start_time
-        self.performance_data[key] = {'Create Time': execution_time}
-
+                
         self.print_stats()
 
+        end_time = time.time()
+        execution_time = end_time - start_time
+        
         print(f"Execution time: {execution_time}")
