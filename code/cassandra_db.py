@@ -40,9 +40,9 @@ class CassandraDB(BaseDB):
         ssl_context.verify_mode = CERT_REQUIRED
 
         # use this if you want to use Boto to set the session parameters.
-        # boto_session = boto3.Session(region_name="us-east-1")
-        # auth_provider = SigV4AuthProvider(boto_session)
-        auth_provider = SigV4AuthProvider(region_name="us-east-1")
+        boto_session = boto3.Session(region_name="us-east-1")
+        auth_provider = SigV4AuthProvider(boto_session)
+        # auth_provider = SigV4AuthProvider(region_name="us-east-1")
        
         cluster = Cluster(['cassandra.us-east-1.amazonaws.com'], ssl_context=ssl_context, auth_provider=auth_provider,
                         port=9142)
