@@ -33,7 +33,7 @@ class MongoDB(BaseDB):
             start_time = time.time()
             data = {
                     "key": key,
-                    "data": instrument_json
+                    "data": DecimalEncoder().encode(instrument_json)
                    }
 
             self.collection.insert_one(data)
