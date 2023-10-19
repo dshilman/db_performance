@@ -17,10 +17,10 @@ class MongoDB(BaseDB):
         client = MongoClient('mongodb://dbperformance:dbperformance@docdb-2023-10-19-21-49-56.cluster-cvhepjn9lnot.us-east-1.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false') 
 
         ##Specify the database to be used
-        db = client.sample_database
+        db = client.dbperformance
 
         ##Specify the collection to be used
-        col = db.sample_collection
+        self.collection = db.sample_collection
 
 
     # Function to create records in MongoDB
