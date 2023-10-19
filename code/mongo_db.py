@@ -33,7 +33,7 @@ class MongoDB(BaseDB):
             start_time = time.time()
             data = {
                     "key": key,
-                    "data": json.dumps(instrument_json, default=DecimalEncoder.default)
+                    "data": json.dumps(instrument_json)
                    }
 
             self.collection.insert_one(data)
