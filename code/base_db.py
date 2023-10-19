@@ -4,12 +4,13 @@ import pandas as pd
 import statistics
 import time
 from decimal import Decimal
+from bson.decimal128 import Decimal128
 
 
 class DecimalEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Decimal):
-            return str(obj)
+            return Decimal128(str(obj))
         return json.JSONEncoder.default(self, obj)
 
 
