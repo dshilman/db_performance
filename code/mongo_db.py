@@ -28,12 +28,9 @@ class MongoDB(BaseDB):
         
 
         for i in range(1, 11):
-            key = str(thread_id * 10 + i)
+            key = str(thread_id * 100 + i)
             start_time = time.time()
-            data = {
-                'key': key,
-                'value': instrument_json
-            }
+            data = instrument_json
 
             self.collection.insert_one(data)
             end_time = time.time()
