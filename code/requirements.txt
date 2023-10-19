@@ -1,6 +1,6 @@
 cassandra-driver
 boto3
 redis
-pyrocksdb
 pandas
 cassandra-sigv4
+pymongo
