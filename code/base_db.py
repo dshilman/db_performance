@@ -27,8 +27,10 @@ class BaseDB:
     def get_instrument_json(self):
         try:
                 # Load the JSON data into a Python dictionary
-                file=open(self.file_name,"r")
-                data = json.loads(file.read(file), parse_float=Decimal)
+                with open(self.file_name, "r") as f:
+                    data = f.read()
+                
+                data = json.loads(str(data), parse_float=Decimal)
                 # print(data)  # You can now work with the 'data' dictionary
 
                 return data
