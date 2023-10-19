@@ -2,6 +2,7 @@ import time
 import json
 from pymongo import MongoClient
 from base_db import BaseDB
+from base_db import DecimalEncoder
 
 
 class MongoDB(BaseDB):
@@ -30,8 +31,10 @@ class MongoDB(BaseDB):
         for i in range(1, 11):
             key = str(thread_id * 100 + i)
             start_time = time.time()
-            data = {"key": key,
-                    "data": json.dumps(instrument_json)}
+            data = {
+                    "key": key,
+                    "data": json.dumps(instrument_json, default=DecimalEncoder.default)
+                   }
 
             self.collection.insert_one(data)
             end_time = time.time()
