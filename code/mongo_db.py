@@ -29,7 +29,7 @@ class MongoDB(BaseDB):
     def create_records(self, thread_id, instrument_json):
 
         for i in range(1, 11):
-            key = str(thread_id * 100 + i)
+            key = int(thread_id * 100 + i)
             start_time = time.time()
             data = {
                     "key": key,
