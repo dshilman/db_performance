@@ -8,6 +8,7 @@ from bson.decimal128 import Decimal128
 
 
 class DecimalEncoder(json.JSONEncoder):
+    
     def default(self, obj):
         if isinstance(obj, Decimal):
             return float(str(obj))
@@ -23,30 +24,80 @@ class BaseDB:
         self.num_records = records
         self.performance_data = {}
         self.file_name = file_name
+        self.json_data = self.get_instrument_json()
+
+    def execute(self):
+
+        start_time = time.time()
+
+        create_threads = []
+        for i in range(self.num_threads):
+            thread = threading.Thread(
+                target=self.create_records, args=(i,))
+            create_threads.append(thread)
+            thread.start()
+
+        for thread in create_threads:
+            thread.join()
+
+        read_threads = []
+        for i in range(self.num_threads):
+            thread = threading.Thread(target=self.read_records, args=(i,))
+            read_threads.append(thread)
+            thread.start()
+
+        for thread in read_threads:
+            thread.join()
+
+        self.print_stats()
+
+        end_time = time.time()
+        execution_time = end_time - start_time
+
+        print(f"Execution time: {execution_time}")
 
     def get_instrument_json(self):
-        try:
-                # Load the JSON data into a Python dictionary
-                with open(self.file_name, "r") as f:
-                    data = f.read()
-                
-                data = json.loads(str(data), parse_float=Decimal)
-                # print(data)  # You can now work with the 'data' dictionary
 
-                return data
+        try:
+            with open(self.file_name, "r") as f:
+                data = f.read()
+
+            return json.loads(str(data), parse_float=Decimal)
+
 
         except FileNotFoundError:
             print(f"File not found: {self.file_name}")
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON: {e}")
 
-    # Function to create records in DynamoDB
-    def create_records(self, thread_id, instrument_json):
+
+    def create_records(self, thread_id):
+
+        for i in range(1, self.num_records + 1):
+            key = int(thread_id * 100 + i)
+            start_time = time.time()
+            self.create_record(key)
+            end_time = time.time()
+            execution_time = end_time - start_time
+            self.performance_data[key] = {'Create Time': execution_time}
+
+    def create_record(self, key, data):
         pass
 
-    # Function to read records from DynamoDB
+
     def read_records(self, thread_id):
+
+        for key in self.performance_data.keys():
+            start_time = time.time()
+            self.read_record(key)
+            end_time = time.time()
+            execution_time = end_time - start_time
+            self.performance_data[key]['Read Time'] = execution_time
+
+
+    def read_record(self, key):
         pass
+
 
     def print_stats(self):
 
@@ -66,39 +117,3 @@ class BaseDB:
                 print(df)
                 print(f"Create Time mean: {create_mean}, std: {create_std}")
                 print(f"Read Time mean: {read_mean}, std: {read_std}")
-
-    def execute(self):
-
-        start_time = time.time()
-
-        instrument_json = self.get_instrument_json()
-
-        # Create and start the threads for record creation
-        create_threads = []
-        for i in range(self.num_threads):
-            thread = threading.Thread(
-                target=self.create_records, args=(i, instrument_json))
-            create_threads.append(thread)
-            thread.start()
-
-        # Wait for all create threads to finish
-        for thread in create_threads:
-            thread.join()
-
-        # Create and start threads for reading records
-        read_threads = []
-        for i in range(self.num_threads):
-            thread = threading.Thread(target=self.read_records, args=(i,))
-            read_threads.append(thread)
-            thread.start()
-
-        # Wait for all read threads to finish
-        for thread in read_threads:
-            thread.join()
-                
-        self.print_stats()
-
-        end_time = time.time()
-        execution_time = end_time - start_time
-        
-        print(f"Execution time: {execution_time}")

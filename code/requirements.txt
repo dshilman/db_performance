@@ -4,3 +4,4 @@ redis
 pandas
 cassandra-sigv4
 pymongo
+bson

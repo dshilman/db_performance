@@ -1,7 +1,5 @@
-import time
 import json
 import boto3
-from decimal import Decimal
 from cassandra.cluster import Cluster
 from cassandra import ConsistencyLevel
 from cassandra.query import SimpleStatement
@@ -11,20 +9,21 @@ from cassandra.auth import PlainTextAuthProvider
 from base_db import BaseDB
 from base_db import DecimalEncoder
 
+
 class CassandraDB(BaseDB):
 
     def __init__(self, file_name, threads, records):
 
         super().__init__(file_name=file_name, threads=threads, records=records)
 
+        self.json_data = json.dumps(
+            self.json_data, cls=DecimalEncoder).encode()
+
         # Cassandra Keyspaces configuration
         contact_points = ['cassandra.us-east-1.amazonaws.com']
         username = 'edxProjectUser-at-597782288487'
         password = 'xxiuSzxzaqyjWxB9X+DyAh0vee7In8fJVLqhZYJmlGs='
         keyspace_name = 'db_performance'
-
-        # # Create a cluster connection
-
 
         ssl_context = SSLContext(PROTOCOL_TLSv1_2)
         ssl_context.load_verify_locations('sf-class2-root.crt')
@@ -38,43 +37,26 @@ class CassandraDB(BaseDB):
 
         # use this if you want to use Boto to set the session parameters.
         boto_session = boto3.Session(region_name="us-east-1")
-        print(boto_session.get_credentials())
-        auth_provider = SigV4AuthProvider(boto_session.get_credentials())
-        # auth_provider = SigV4AuthProvider(region_name="us-east-1")
-       
-        cluster = Cluster(['cassandra.us-east-1.amazonaws.com'], ssl_context=ssl_context, auth_provider=auth_provider,
-                        port=9142)
+        credentials = boto_session.get_credentials()
+        print(credentials)
+        auth_provider = SigV4AuthProvider(
+            region_name="us-east-1", boto_session=boto_session)
+
+        cluster = Cluster(contact_points, ssl_context=ssl_context, auth_provider=auth_provider,
+                          port=9142)
         self.session = cluster.connect(keyspace=keyspace_name)
 
+    def create_record(self, key):
 
-    # Function to create records in Keyspaces :)
+        query = SimpleStatement(
+            f"INSERT INTO db_performance.instruments (key, data) VALUES ({key}, $${self.json_data}$$);", consistency_level=ConsistencyLevel.LOCAL_QUORUM)
 
-    def create_records(self, thread_id, instrument_json):
+        self.session.execute(query)
 
-        value = json.dumps(instrument_json, cls=DecimalEncoder).encode()
+    def read_record(self, key):
 
-        for i in range(1, self.num_records):
-            key = int(thread_id * 100 + i)
-            query = SimpleStatement(
-                f"INSERT INTO db_performance.instruments (key, data) VALUES ({key}, $${value}$$);", consistency_level=ConsistencyLevel.LOCAL_QUORUM)
-
-            start_time = time.time()
-            self.session.execute(query)
-            end_time = time.time()
-            execution_time = end_time - start_time
-
-            self.performance_data[key] = {'Create Time': execution_time}
-
-    # Function to read records from Keyspaces
-    def read_records(self, thread_id):
-
-        for key in self.performance_data.keys():
-            start_time = time.time()
-            query = f"SELECT data FROM db_performance.instruments WHERE key = {key}"
-            self.session.execute(query)
-            end_time = time.time()
-            execution_time = end_time - start_time
-            self.performance_data[key]['Read Time'] = execution_time
+        query = f"SELECT data FROM db_performance.instruments WHERE key = {key}"
+        self.session.execute(query)
 
 
 if __name__ == "__main__":
