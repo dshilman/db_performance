@@ -39,9 +39,9 @@ class CassandraDB(BaseDB):
         boto_session = boto3.Session(region_name="us-east-1")
         credentials = boto_session.get_credentials().get_frozen_credentials()
 
-        aws_access_key_id = credentials['Credentials']['AccessKeyId']
-        aws_secret_access_key = credentials['Credentials']['SecretAccessKey']
-        aws_session_token = credentials['Credentials']['SessionToken']
+        aws_access_key_id = credentials['AccessKeyId']
+        aws_secret_access_key = credentials['SecretAccessKey']
+        aws_session_token = credentials['SessionToken']
 
         auth_provider = SigV4AuthProvider(
             region_name="us-east-1", aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key, aws_session_token=aws_session_token)
