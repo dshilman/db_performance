@@ -7,7 +7,7 @@ import json
 
 class RedisDB (BaseDB):
 
-    def __init__(self, file_name, threads, records):
+    def __init__(self, file_name='instrument.json', threads=10, records=20):
 
         super().__init__(file_name, threads, records)
 

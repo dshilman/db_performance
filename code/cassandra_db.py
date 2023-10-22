@@ -12,7 +12,7 @@ from base_db import DecimalEncoder
 
 class CassandraDB(BaseDB):
 
-    def __init__(self, file_name, threads, records):
+    def __init__(self, file_name='instrument.json', threads=10, records=20):
 
         super().__init__(file_name=file_name, threads=threads, records=records)
 
