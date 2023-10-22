@@ -1,5 +1,3 @@
-Certainly! Here's a GitHub README file based on the provided text:
-
 ```markdown
 # AWS NoSQL Database Performance Testing Lab
 
@@ -12,8 +10,6 @@ This article does not aim to determine which AWS NoSQL database is superior, as 
 ### Performance Testing
 
 We will start by defining a performance test case that concurrently inserts a JSON payload 200 times and then reads it 200 times.
-
-#### JSON Payload
 
 The base/parent class in `base_db.py` implements the test case logic by executing 10 concurrent threads to create and read 200 records. These threads execute the write/read routines in the `create_records` and `read_records` functions, respectively. Notably, these functions do not include any database-specific logic but instead measure the performance of each read-and-write execution.
 
@@ -177,4 +173,53 @@ sudo python3 -m mongo_db
 You should see the following output for the first two test cases:
 
 ```shell
+(venv) sh-5.2$ sudo python3 -m dynamo_db
+
+Performance Data:
+
+     Create Time  Read Time
+
+1          0.336909   0.031491
+2          0.056884   0.053334
+3       0.085881   0.031385
+4          0.084940   0.050059
+5          0.169012   0.050044
+..              ...        ...
+916        0.047431   0.041877
+917        0.043795   0.024649
+918        0.075325   0.035251
+919        0.101007   0.068767
+920        0.103432   0.037742
+
+[200 rows x 2 columns]
+Create Time mean: 0.0858926808834076, stdev: 0.07714510154026173
+Read Time mean: 0.04880355834960937, stdev: 0.028805479258627295
+Execution time: 11.499964714050293
 (venv) sh-5.2$
+
+**#### Test Results
+**
+
+DYNAMODB	CASSANDRA	MONGODB	REDIS
+Create	mean: 0.0859
+stdev: 0.0771	mean: 0.0091
+stdev: 0.0052	mean: 0.0292
+std: 0.0764	mean: 0.0028
+stdev: 0.0049
+Read	mean:  0.0488
+stdev: 0.0288	mean: 0.0072
+stdev: 0.0036	mean: 0.0509
+std: 0.0027	mean: 0.0012
+stdev: 0.0016
+Exec Time	11.45 sec	1.6279 sec	10.2608 sec	0.3465 sec
+ 
+
+**#### My Observations:
+**
+I was blown away by Cassandra’s fast performance. Cassandra support for SQL allows rich access pattern queries and AWS Keyspaces offer cross-region replication.
+I find DynamoDB's performance disappointing despite the AWS hype about it. You should try to avoid the cross-partition table scan and thus must use an index for each data access pattern. DynamoDB global tables enable cross-region data replication.
+MongoDB has a very simple SDK, is fun to use, and has the best support for the JSON data type. You can create indexes and run complex queries on nested JSON attributes. As new binary data formats are emerging, MongoDB may lose its appeal.
+Redis performance is amazingly fast, however, at the end of the day, it’s a key/value cache even if it supports complex data types. Redis offers powerful features such as pipelining and scripting to further improve query performance by passing code to Redis to execute on the server side.
+In conclusion, choosing the AWS-managed NoSQL database for your enterprise reference data platform depends on your specific priorities. If performance and cross-region replication are your primary concern, AWS Cassandra stands out as a clear winner.  DynamoDB integrates well with other AWS services such as Lambda and Kinesis and therefore is a great option for AWS native or serverless architecture.  For applications requiring robust support for JSON data types, MongoDB takes the lead. However, if your focus is on fast lookup or session management for high availability, Redis proves to be an excellent option. Ultimately, the decision should align with your organization's unique requirements.
+
+As always, you can find the code in this GitHub repo. Feel free to contact me if you need help running this code or with the AWS setup.
