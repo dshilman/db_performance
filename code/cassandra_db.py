@@ -37,14 +37,9 @@ class CassandraDB(BaseDB):
 
         # use this if you want to use Boto to set the session parameters.
         boto_session = boto3.Session(region_name="us-east-1")
-        credentials = boto_session.get_credentials()
-
-        aws_access_key_id = credentials['Credentials']['AccessKeyId']
-        aws_secret_access_key = credentials['Credentials']['SecretAccessKey']
-        aws_session_token = credentials['Credentials']['SessionToken']
 
         auth_provider = SigV4AuthProvider(
-            region_name="us-east-1", aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key, aws_session_token=aws_session_token)
+            region_name="us-east-1", session=boto_session)
 
         cluster = Cluster(contact_points, ssl_context=ssl_context, auth_provider=auth_provider,
                           port=9142)
