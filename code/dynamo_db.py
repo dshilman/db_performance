@@ -8,7 +8,6 @@ class DynamoDB (BaseDB):
 
         super().__init__(file_name, threads, records)
 
-        # AWS DynamoDB configuration
         dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
         table_name = 'Instruments'
         self.table = dynamodb.Table(table_name)
@@ -28,5 +27,4 @@ class DynamoDB (BaseDB):
 
 if __name__ == "__main__":
 
-    file_name = 'instrument.json'
-    DynamoDB(file_name=file_name, threads=10, records=20).execute()
+    DynamoDB().execute()

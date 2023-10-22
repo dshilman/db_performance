@@ -18,7 +18,7 @@ class DecimalEncoder(json.JSONEncoder):
 
 class BaseDB:
 
-    def __init__(self, file_name, threads, records):
+    def __init__(self, file_name='instrument.json', threads=10, records=20):
 
         self.num_threads = threads
         self.num_records = records
@@ -110,10 +110,10 @@ class BaseDB:
                 # Calculate mean and standard deviation for each column
                 create_mean = statistics.mean(df['Create Time'])
                 read_mean = statistics.mean(df['Read Time'])
-                create_std = statistics.stdev(df['Create Time'])
-                read_std = statistics.stdev(df['Read Time'])
+                create_stdev = statistics.stdev(df['Create Time'])
+                read_stdev = statistics.stdev(df['Read Time'])
 
                 print("Performance Data:")
                 print(df)
-                print(f"Create Time mean: {create_mean}, std: {create_std}")
-                print(f"Read Time mean: {read_mean}, std: {read_std}")
+                print(f"Create Time mean: {create_mean}, stdev: {create_stdev}")
+                print(f"Read Time mean: {read_mean}, stdev: {read_stdev}")
