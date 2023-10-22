@@ -20,7 +20,7 @@ class DynamoDB (BaseDB):
         }
         self.table.put_item(Item=item)
 
-    def read_records(self, key):
+    def read_record(self, key):
 
         self.table.get_item(Key={'key': key})
 
