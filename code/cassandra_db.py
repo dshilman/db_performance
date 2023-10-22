@@ -21,21 +21,12 @@ class CassandraDB(BaseDB):
 
         # Cassandra Keyspaces configuration
         contact_points = ['cassandra.us-east-1.amazonaws.com']
-        username = 'edxProjectUser-at-597782288487'
-        password = 'xxiuSzxzaqyjWxB9X+DyAh0vee7In8fJVLqhZYJmlGs='
         keyspace_name = 'db_performance'
 
         ssl_context = SSLContext(PROTOCOL_TLSv1_2)
         ssl_context.load_verify_locations('sf-class2-root.crt')
         ssl_context.verify_mode = CERT_REQUIRED
 
-        # auth_provider = PlainTextAuthProvider(
-        #      username=self.username, password=self.password)
-        # cluster = Cluster(contact_points=self.contact_points,
-        #                        ssl_context=self.ssl_context, auth_provider=self.auth_provider, port=9142)
-        # self.session = self.cluster.connect(keyspace_name)
-
-        # use this if you want to use Boto to set the session parameters.
         boto_session = boto3.Session(region_name="us-east-1")
 
         auth_provider = SigV4AuthProvider(
