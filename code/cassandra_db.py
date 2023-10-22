@@ -37,7 +37,7 @@ class CassandraDB(BaseDB):
 
         # use this if you want to use Boto to set the session parameters.
         boto_session = boto3.Session(region_name="us-east-1")
-        credentials = boto_session.get_credentials().get_frozen_credentials()
+        credentials = boto_session.get_credentials()
 
         aws_access_key_id = credentials['AccessKeyId']
         aws_secret_access_key = credentials['SecretAccessKey']
