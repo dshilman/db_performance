@@ -1,4 +1,3 @@
-import time
 from redis import Redis
 from base_db import BaseDB
 from base_db import DecimalEncoder
@@ -14,8 +13,7 @@ class RedisDB (BaseDB):
         self.json_data = json.dumps(
             self.json_data, cls=DecimalEncoder).encode()
 
-        # Redis configuration
-        redis_host = 'instruments.otxqy9.clustercfg.use1.cache.amazonaws.com'
+        redis_host = 'instruments.<your own>.clustercfg.use1.cache.amazonaws.com'
 
         self.redis = Redis(host=redis_host, port=6379, decode_responses=True)
 

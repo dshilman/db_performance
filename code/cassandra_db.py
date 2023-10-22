@@ -29,8 +29,7 @@ class CassandraDB(BaseDB):
 
         boto_session = boto3.Session(region_name="us-east-1")
 
-        auth_provider = SigV4AuthProvider(
-            region_name="us-east-1", session=boto_session)
+        auth_provider = SigV4AuthProvider(session=boto_session)
 
         cluster = Cluster(contact_points, ssl_context=ssl_context, auth_provider=auth_provider,
                           port=9142)

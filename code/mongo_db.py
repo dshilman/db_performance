@@ -1,5 +1,3 @@
-import time
-import json
 from pymongo import MongoClient
 from base_db import BaseDB
 from base_db import DecimalEncoder
@@ -13,7 +11,7 @@ class MongoDB(BaseDB):
 
         self.json_data = DecimalEncoder().encode(self.json_data)
 
-        client = MongoClient('mongodb://dbperformance:dbperformance@docdb-2023-10-19-21-49-56.cluster-cvhepjn9lnot.us-east-1.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false')
+        client = MongoClient('mongodb://<db_user>:<db_password>@docdb-2023-10-19-21-49-56.cluster-cvhepjn9lnot.us-east-1.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false')
 
         # Specify the database to be used
         db = client.dbperformance
