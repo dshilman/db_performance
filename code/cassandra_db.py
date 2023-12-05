@@ -12,6 +12,17 @@ from base_db import DecimalEncoder
 
 class CassandraDB(BaseDB):
 
+    # Cassandra Keyspaces configuration
+    contact_points = ['cassandra.us-east-1.amazonaws.com']
+    keyspace_name = 'db_performance'
+
+    ssl_context = SSLContext(PROTOCOL_TLSv1_2)
+    ssl_context.load_verify_locations('sf-class2-root.crt')
+    ssl_context.verify_mode = CERT_REQUIRED
+
+    boto_session = boto3.Session(region_name="us-east-1")
+    auth_provider = SigV4AuthProvider(session=boto_session)
+    
     def __init__(self, file_name='instrument.json', threads=10, records=20):
 
         super().__init__(file_name=file_name, threads=threads, records=records)
@@ -19,21 +30,9 @@ class CassandraDB(BaseDB):
         self.json_data = json.dumps(
             self.json_data, cls=DecimalEncoder).encode()
 
-        # Cassandra Keyspaces configuration
-        contact_points = ['cassandra.us-east-1.amazonaws.com']
-        keyspace_name = 'db_performance'
-
-        ssl_context = SSLContext(PROTOCOL_TLSv1_2)
-        ssl_context.load_verify_locations('sf-class2-root.crt')
-        ssl_context.verify_mode = CERT_REQUIRED
-
-        boto_session = boto3.Session(region_name="us-east-1")
-
-        auth_provider = SigV4AuthProvider(session=boto_session)
-
-        cluster = Cluster(contact_points, ssl_context=ssl_context, auth_provider=auth_provider,
+        cluster = Cluster(CassandraDB.contact_points, ssl_context=CassandraDB.ssl_context, auth_provider=CassandraDB.auth_provider,
                           port=9142)
-        self.session = cluster.connect(keyspace=keyspace_name)
+        self.session = cluster.connect(keyspace=CassandraDB.keyspace_name)
 
     def create_record(self, key):
 
